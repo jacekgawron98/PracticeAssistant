@@ -8,5 +8,15 @@ namespace PracticeAssistant.Models
 {
     public class PAUser : IdentityUser
     {
+        public PAUser()
+        {
+
+        }
+
+        public PAUser(string username, string email)
+        {
+            UserName = username;
+            Email = email;
+        }
     }
 }

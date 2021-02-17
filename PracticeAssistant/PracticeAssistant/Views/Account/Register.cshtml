@@ -1,0 +1,50 @@
+﻿@model PracticeAssistant.ViewModels.Account.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h1>Register</h1>
+
+@{
+    if (Model == null)
+    {
+        <h3>New</h3>
+    }
+    else
+    {
+        <h3>Added</h3>
+    }
+}
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-controller="Account" asp-action="Register" method="post">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username, new { @class = "form_control" })
+        @Html.ValidationMessageFor(m => m.Username)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "form_control" })
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m=>m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form_control" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmailAddress)
+        @Html.TextBoxFor(m=>m.EmailAddress, new { @class = "form_control" })
+        @Html.ValidationMessageFor(m=>m.EmailAddress)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m=>m.ConfirmEmail)
+        @Html.TextBoxFor(m=>m.ConfirmEmail, new {@class = "form_control" })
+        @Html.ValidationMessageFor(m=>m.ConfirmEmail)
+    </div>
+    <button type="submit" class="btn btn-primary">Sign up</button>
+</form>
+
+@section Scripts{ 
+    @await Html.PartialAsync("_ValidationScriptsPartial") 
+}
