@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PracticeAssistant.Models
+
+@inject SignInManager<PAUser> SignInManager
+@inject UserManager<PAUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form id="logoutForm"  class="navbar-right" asp-action="Logout" asp-controller="Account" method="post">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @{ 
+                    //TO DO user account manage page
+                }
+                <a asp-controller="" asp-action="" title="Manage">@UserManager.GetUserName(User)</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Sign out</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a class="btn btn-primary" asp-controller="Account" asp-action="Register">SIGN UP </a>
+        </li>
+        <li>
+            <a class="btn btn-light" asp-controller="Account" asp-action="Login">Sign in</a>
+        </li>
+    </ul>
+}
