@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace PracticeAssistant.ViewModels.Account
 {
-    public class RegisterViewModel
-    {
-        [Required, MaxLength(255)]
-        public string Username { get; set; }
-        
-        [Required,DataType(DataType.Password)]
-        public string Password { get; set; }
-        
+    public class RegisterViewModel : LoginViewModel
+    {   
         [DataType(DataType.Password),Compare(nameof(Password))]
         [Display(Name = "Confirm your password")]
         public string ConfirmPassword { get; set; }
