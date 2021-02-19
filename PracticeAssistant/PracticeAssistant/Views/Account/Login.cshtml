@@ -4,7 +4,7 @@
 }
 <h1>Sign in</h1>
 <div asp-validation-summary="All" class="text-danger"></div>
-<form asp-action="Login" asp-controller="Account" method="post">
+<form asp-route-returnurl="@ViewData["ReturnUrl"]" asp-action="Login" asp-controller="Account" method="post">
     <div class="form-group">
         @Html.LabelFor(m => m.Username)
         @Html.TextBoxFor(m => m.Username)

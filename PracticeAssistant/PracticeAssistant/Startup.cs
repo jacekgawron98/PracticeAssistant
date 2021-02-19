@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PracticeAssistant.Config;
 using PracticeAssistant.Models;
+using PracticeAssistant.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,13 @@ namespace PracticeAssistant
         {
             services.AddDbContext<AppDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<PAUser, IdentityRole>()
+            services.AddIdentity<PAUser, IdentityRole>(opt =>
+                opt.SignIn.RequireConfirmedEmail = true
+            )
                 .AddEntityFrameworkStores<AppDBContext>()
                 .AddDefaultTokenProviders();
+            services.AddTransient<IEmailService, EmailService>();
+            services.Configure<SendGridAuth>(Configuration);
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
