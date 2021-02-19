@@ -74,10 +74,10 @@ namespace PracticeAssistant.Controllers
                 if (result.Succeeded)
                 {
                     var confirmCode = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var confirmLink = Url.Action(nameof(ConfirmEmail), "Account"
-                        , new { confirmCode, email = user.Email }, Request.Scheme);
+                    var confirmLink = Url.Action(nameof(ConfirmEmail), "Account", 
+                        new { confirmCode, email = user.Email }, Request.Scheme);
                     await _emailService.SendEmailAsync(model.EmailAddress, "Email confirmation link", confirmLink);
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction(nameof(RegisterComplete));
                 }
                 else
                 {
@@ -88,6 +88,12 @@ namespace PracticeAssistant.Controllers
                 }
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult RegisterComplete()
+        {
+            return View();
         }
 
         [HttpPost]
